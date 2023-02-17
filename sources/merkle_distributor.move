@@ -97,6 +97,12 @@ module mokshya::merkle_distributor{
         assert!(resource_data.source == signer::address_of(distributor), INVALID_SIGNER);
         coin::transfer<CoinType>(&resource_signer_from_cap,signer::address_of(distributor),coin::balance<CoinType>(signer::address_of(&resource_signer_from_cap)));
     }
+    public entry fun update_root(distributor: &signer,resource_account:address,merkle_root:vector<u8>)acquires ResourceInfo,DistributionDetails {
+        let resource_data = borrow_global<ResourceInfo>(resource_account);
+        assert!(resource_data.source == signer::address_of(distributor), INVALID_SIGNER);
+        let distribution_data = borrow_global_mut<DistributionDetails>(resource_account);
+        distribution_data.merkle_root = merkle_root;
+    }
     public entry fun pause_distribution(distributor: &signer,resource_account:address)acquires ResourceInfo,ClaimDistribution {
         let resource_data = borrow_global<ResourceInfo>(resource_account);
         assert!(resource_data.source == signer::address_of(distributor), INVALID_SIGNER);
