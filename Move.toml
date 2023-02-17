@@ -1,0 +1,9 @@
+[package]
+name = 'merkle-distributor'
+version = '1.0.0'
+[addresses]
+mokshya = "_"
+[dependencies.AptosFramework]
+git = 'https://github.com/aptos-labs/aptos-core.git'
+rev = 'main'
+subdir = 'aptos-move/framework/aptos-framework'
